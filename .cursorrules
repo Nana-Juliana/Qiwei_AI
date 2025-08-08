@@ -1,0 +1,158 @@
+# Scratchpad
+
+## Current Task: 用户信息模块前后端连接 (已完成)
+
+**最新任务状态:** 
+- 用户要求对前端用户信息模块进行前后端连接
+- 后端获取external_userid，查询数据库中是否有该用户信息
+- 若有用户信息，将数据库信息发送给前端并展示
+- 前端可修改信息并发送给后端，后端更新数据库
+- 若无用户信息，提示前端填写，后端创建新用户记录
+- 已完成用户信息模块的专项前后端集成
+
+**用户信息模块集成详情:**
+[X] 创建用户信息专用API服务 (src/services/userService.js)
+  - [X] login(): 用户登录获取认证token
+  - [X] getBasicInfo(): 获取用户基本信息
+  - [X] getStudentDetails(): 获取学员详细信息
+  - [X] getParentDetails(): 获取家长详细信息
+  - [X] updateUserInfo(): 更新/创建用户信息
+  - [X] getAllUserData(): 并行获取所有用户数据
+[X] 更新UserInfoCard组件连接后端
+  - [X] 添加loading、error、authToken、userExists、isNewUser状态管理
+  - [X] 组件加载时获取认证token和用户数据
+  - [X] 处理用户存在情况：展示数据库中的真实数据
+  - [X] 处理用户不存在情况：自动打开填写表单
+  - [X] 更新保存逻辑调用后端API创建/更新用户
+  - [X] 根据新用户/编辑用户状态调整UI文本
+[X] UI状态处理完善
+  - [X] Loading状态：骨架屏动画
+  - [X] Error状态：错误信息和重试按钮
+  - [X] 新用户状态：填写表单和创建按钮
+  - [X] 编辑用户状态：编辑表单和保存按钮
+[X] 验证无linter错误
+
+## Previous Task: Backend Implementation Guide Based on Frontend Requirements
+
+**Task Description:** 
+- Analyze frontend functionality requirements and API documentation
+- Create comprehensive backend implementation guide
+- Define technology stack, architecture, and implementation details
+- Provide database design and API specifications
+- Include simulation methods for external data
+- Implement complete backend code with DeepSeek AI integration
+
+**Progress:**
+[X] Analyze frontend component functionality (UserInfoCard, AIResponseCard)
+[X] Review API documentation requirements
+[X] Define technology stack (Flask + PostgreSQL + SQLAlchemy)
+[X] Design database schema with 5 core tables
+[X] Implement API specifications for user management (4 endpoints)
+[X] Implement API specifications for AI response management (2 endpoints)
+[X] Create simulation API for customer messages
+[X] Define service layer architecture
+[X] Provide data models and validation schemas
+[X] Include deployment and testing guidelines
+[X] Generate comprehensive backend implementation guide
+[X] Update guide based on user feedback (consolidated users table, no history recording)
+[X] Implement complete backend code with DeepSeek AI integration
+[X] Create project structure and all necessary files
+[X] Implement data models, services, and API endpoints
+[X] Add comprehensive testing and documentation
+[X] Update Backend_Implementation_Guide.md with detailed project structure and file descriptions
+[X] 集成华为云Maas DeepSeek API，实现智能客服回复功能
+
+## Task Summary
+
+**Backend Implementation Guide Analysis:**
+
+1. **Frontend Requirements Analysis:**
+   - Analyzed UserInfoCard component: user info display, editing, student/parent details
+   - Analyzed AIResponseCard component: AI response display, sending, copying
+   - Confirmed simplified functionality without CRM binding, staff queries, or course schedules
+
+2. **Technology Stack Selection:**
+   - **Web Framework**: Flask 2.3+ (lightweight, flexible, Python-native)
+   - **Database**: PostgreSQL 14+ (robust, ACID compliance, JSON support)
+   - **ORM**: SQLAlchemy 2.0+ (type-safe, modern Python features)
+   - **Authentication**: JWT (stateless, scalable)
+   - **Validation**: Marshmallow (schema validation, serialization)
+
+3. **Database Design:**
+   - **1 Core Table**: users (consolidated student + parent information)
+   - **Simplified Structure**: No conversation or AI response history tables
+   - **Data Types**: Appropriate for Chinese text and educational data
+   - **Timestamps**: Created/updated tracking for user table
+
+4. **API Implementation:**
+   - **Authentication (3 endpoints)**: Login, verify, refresh token
+   - **User Management (4 endpoints)**: Basic info, student details, parent details, update
+   - **AI Response Management (2 endpoints)**: Generate AI response, send message
+   - **Simulation API (1 endpoint)**: Mock customer message with immediate AI response
+   - **Authentication**: JWT-based with proper error handling
+
+5. **Service Layer Architecture:**
+   - **UserService**: Handle all user-related operations (updated for consolidated table)
+   - **AIService**: Generate AI responses without persistence
+   - **MessageService**: Handle message sending operations without history
+   - **Separation of Concerns**: Clear business logic separation
+
+**Key Implementation Features:**
+
+**Database Schema:**
+- Consolidated users table design (student + parent info in single table)
+- Support for Chinese characters (UTF-8)
+- Audit trails with timestamps
+- Flexible data storage for educational information
+- Simplified structure without conversation/AI response history
+
+**API Design:**
+- RESTful conventions with consistent response format
+- Proper HTTP status codes and error handling
+- JWT authentication for security
+- CORS support for frontend integration
+- Stateless AI response generation (no history persistence)
+
+**AI Integration:**
+- DeepSeek API integration for intelligent responses
+- Professional educational context prompts
+- Fallback mechanisms for API failures
+- Configurable API endpoints and keys
+
+**Simulation Capabilities:**
+- Mock customer message API for testing
+- Direct AI response generation without history tracking
+- External user ID handling
+- Immediate response generation based on current question
+
+**Deployment Ready:**
+- Environment configuration management
+- Database migration support
+- Production deployment with Gunicorn
+- Testing framework integration
+- Complete project structure and documentation
+
+**Security & Performance:**
+- Input validation and sanitization
+- SQL injection prevention via ORM
+- Connection pooling for database
+- Rate limiting considerations
+- Comprehensive error handling and logging
+
+**Recent Bug Fixes (2024-01-01):**
+- Fixed JWT authentication missing endpoints
+- Improved database model date handling
+- Enhanced API path compatibility (UUID vs external_userid)
+- Added comprehensive error handling and logging
+- Removed hardcoded API keys for security
+- Created complete authentication system
+- Added comprehensive testing framework
+- Improved configuration management
+
+## Lessons
+
+### User Specified Lessons
+- You have a python venv in ./venv. Use it.
+- Include info useful for debugging in the program output.
+- Read the file before you try to edit it.
+- Due to Cursor's limit, when you use `git` and `gh` and need to submit a multiline commit message, first write the message in a file, and then use `git commit -F <filename>` or similar command to commit. And then remove the file. Include "[Cursor] " in the commit message and PR title. 
